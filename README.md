@@ -16,4 +16,4 @@ log.Information("This is an information message!");
 
 ### Example
 
-![Simple Message](/assets/example.jpg)
+![Simple Message](/assets/example.png)
