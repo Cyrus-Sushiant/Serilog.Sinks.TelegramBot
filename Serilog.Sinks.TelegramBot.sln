@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.TelegramBot", "Serilog.Sinks.TelegramBot\Serilog.Sinks.TelegramBot.csproj", "{15B900D7-DBBA-4F93-9990-28D588470D45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.TelegramBot.Example", "Serilog.Sinks.TelegramBot.Example\Serilog.Sinks.TelegramBot.Example.csproj", "{A51C7CCC-F87F-465A-A734-B841561B9D1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15B900D7-DBBA-4F93-9990-28D588470D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B900D7-DBBA-4F93-9990-28D588470D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B900D7-DBBA-4F93-9990-28D588470D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B900D7-DBBA-4F93-9990-28D588470D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51C7CCC-F87F-465A-A734-B841561B9D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51C7CCC-F87F-465A-A734-B841561B9D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51C7CCC-F87F-465A-A734-B841561B9D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51C7CCC-F87F-465A-A734-B841561B9D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {976BFDEC-06B9-4D8A-B096-8BDC2062876B}
+	EndGlobalSection
+EndGlobal

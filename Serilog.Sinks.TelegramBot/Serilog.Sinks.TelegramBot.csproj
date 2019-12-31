@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Cyrus</Authors>
+    <Version>1.0.1</Version>
+    <Description>A Serilog sink that writes events as messages to Telegram.</Description>
+    <RepositoryUrl>https://github.com/Cyrus-Sushiant/serilog-sinks-telegram</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Company>SmartClouds.co</Company>
+    <PackageId>Serilog.Sinks.TelegramBot</PackageId>
+    <Copyright>MIT License</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/Cyrus-Sushiant/serilog-sinks-telegram</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Product>Serilog.Sinks.TelegramBot</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
