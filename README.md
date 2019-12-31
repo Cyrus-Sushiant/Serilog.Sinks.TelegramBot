@@ -8,7 +8,7 @@ A Serilog sink that writes events as messages to [Telegram](https://telegram.org
 All you need is bot token and chat id. To manage bots go to [Bot Father](https://telegram.me/botfather). After you got bot token add bot to contacts and start it (`/start`). To get your id navigate to https://api.telegram.org/botTOKEN/getUpdates
 
 ## Available for
-* NetCore 3.1
+* .NetCore 3.1
 
 # Install
 ```
