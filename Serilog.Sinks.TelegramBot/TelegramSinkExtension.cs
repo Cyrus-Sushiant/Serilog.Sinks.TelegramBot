@@ -10,6 +10,7 @@ namespace Serilog.Sinks.TelegramBot
             this LoggerSinkConfiguration loggerConfiguration,
             string token,
             string chatId,
+            string applicationName = null,
             TelegramSink.RenderMessageMethod renderMessageImplementation = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             IFormatProvider formatProvider = null
@@ -22,6 +23,7 @@ namespace Serilog.Sinks.TelegramBot
                 logEventSink: new TelegramSink(
                     chatId: chatId,
                     token: token,
+                    applicationName: applicationName,
                     renderMessageImplementation: renderMessageImplementation,
                     formatProvider: formatProvider
                 ),

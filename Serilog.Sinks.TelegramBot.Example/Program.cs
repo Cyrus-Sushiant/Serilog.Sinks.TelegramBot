@@ -9,7 +9,7 @@ namespace Serilog.Sinks.TelegramBot.Example
 
             var log = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.TelegramBot("000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "000000")
+                .WriteTo.TelegramBot("000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "000000", "Example")
                 .CreateLogger();
 
             try

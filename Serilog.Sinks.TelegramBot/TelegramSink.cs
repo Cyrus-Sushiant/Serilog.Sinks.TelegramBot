@@ -14,6 +14,7 @@ namespace Serilog.Sinks.TelegramBot
         /// </summary>
         public delegate TelegramMessage RenderMessageMethod(LogEvent input);
 
+        private static string _applicationName;
         private readonly string _chatId;
         private readonly string _token;
         protected readonly IFormatProvider FormatProvider;
@@ -23,7 +24,7 @@ namespace Serilog.Sinks.TelegramBot
         /// </summary>
         protected RenderMessageMethod RenderMessageImplementation = RenderMessage;
 
-        public TelegramSink(string chatId, string token, RenderMessageMethod renderMessageImplementation,
+        public TelegramSink(string chatId, string token, string applicationName, RenderMessageMethod renderMessageImplementation,
             IFormatProvider formatProvider)
         {
             if (string.IsNullOrWhiteSpace(value: chatId))
@@ -35,6 +36,7 @@ namespace Serilog.Sinks.TelegramBot
             FormatProvider = formatProvider;
             if (renderMessageImplementation != null)
                 RenderMessageImplementation = renderMessageImplementation;
+            _applicationName = applicationName;
             _chatId = chatId;
             _token = token;
         }
@@ -55,6 +57,11 @@ namespace Serilog.Sinks.TelegramBot
         {
             var sb = new StringBuilder();
             sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage()}");
+
+            if (!string.IsNullOrEmpty(_applicationName))
+            {
+                sb.AppendLine(value: $"🤖 App: `{_applicationName}`");
+            }
 
             if (logEvent.Exception != null)
             {
