@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Cyrus</Authors>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Description>A Serilog sink that writes events as messages to Telegram.</Description>
     <RepositoryUrl>https://github.com/Cyrus-Sushiant/serilog-sinks-telegram</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
