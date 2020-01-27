@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Cyrus</Authors>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>A Serilog sink that writes events as messages to Telegram.</Description>
-    <RepositoryUrl>https://github.com/Cyrus-Sushiant/serilog-sinks-telegram</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <Company>SmartClouds.co</Company>
     <PackageId>Serilog.Sinks.TelegramBot</PackageId>
     <Copyright>MIT License</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/Cyrus-Sushiant/serilog-sinks-telegram</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
