@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1;net5.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
     <Authors>Cyrus</Authors>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Description>A Serilog sink that writes events as messages to Telegram.</Description>
     <RepositoryUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>

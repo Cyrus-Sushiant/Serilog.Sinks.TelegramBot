@@ -10,6 +10,7 @@ All you need is bot token and chat id. To manage bots go to [Bot Father](https:/
 ## Available for
 * .NetCore 3.1
 * .Net 5.0
+* .Net 6.0
 
 # Install
 ```
