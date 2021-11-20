@@ -6,7 +6,6 @@ namespace Serilog.Sinks.TelegramBot.Example
     {
         static void Main(string[] args)
         {
-
             var log = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .WriteTo.TelegramBot("000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "000000", "Example")
