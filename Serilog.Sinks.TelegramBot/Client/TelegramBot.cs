@@ -20,13 +20,13 @@ namespace Serilog.Sinks.TelegramBot
             _httpClient.Timeout = TimeSpan.FromSeconds(value: timeoutSeconds);
         }
 
-        public async Task<HttpResponseMessage> PostAsync(TelegramMessage message, string chatId)
+        public async Task<HttpResponseMessage> PostAsync(TelegramMessage message, string chatId, ParseMode parseMode)
         {
             var payload = new
             {
                 chat_id = chatId,
                 text = message.Text,
-                parse_mode = "markdown"
+                parse_mode = parseMode.ToString()
             };
             var json = JsonSerializer.Serialize(value: payload);
             var response = await _httpClient.PostAsync(requestUri: _apiUrl,

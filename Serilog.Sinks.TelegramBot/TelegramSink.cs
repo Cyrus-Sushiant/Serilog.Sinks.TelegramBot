@@ -17,6 +17,7 @@ namespace Serilog.Sinks.TelegramBot
         private static string _applicationName;
         private readonly string _chatId;
         private readonly string _token;
+        private readonly ParseMode _parseMode;
         protected readonly IFormatProvider FormatProvider;
 
         /// <summary>
@@ -24,8 +25,7 @@ namespace Serilog.Sinks.TelegramBot
         /// </summary>
         protected RenderMessageMethod RenderMessageImplementation = RenderMessage;
 
-        public TelegramSink(string chatId, string token, string applicationName, RenderMessageMethod renderMessageImplementation,
-            IFormatProvider formatProvider)
+        public TelegramSink(string chatId, string token, string applicationName, ParseMode parseMode, RenderMessageMethod renderMessageImplementation, IFormatProvider formatProvider)
         {
             if (string.IsNullOrWhiteSpace(value: chatId))
                 throw new ArgumentNullException(paramName: nameof(chatId));
@@ -36,9 +36,11 @@ namespace Serilog.Sinks.TelegramBot
             FormatProvider = formatProvider;
             if (renderMessageImplementation != null)
                 RenderMessageImplementation = renderMessageImplementation;
+
             _applicationName = applicationName;
             _chatId = chatId;
             _token = token;
+            _parseMode = parseMode;
         }
 
         #region ILogEventSink implementation
@@ -100,7 +102,7 @@ namespace Serilog.Sinks.TelegramBot
 
             var client = new TelegramBot(botToken: token, timeoutSeconds: 5);
 
-            var sendMessageTask = client.PostAsync(message: message, chatId: chatId);
+            var sendMessageTask = client.PostAsync(message: message, chatId: chatId, parseMode: _parseMode);
             Task.WaitAll(sendMessageTask);
 
             var sendMessageResult = sendMessageTask.Result;

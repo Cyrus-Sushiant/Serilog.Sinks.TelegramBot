@@ -13,7 +13,8 @@ namespace Serilog.Sinks.TelegramBot
             string applicationName = null,
             TelegramSink.RenderMessageMethod renderMessageImplementation = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-            IFormatProvider formatProvider = null
+            IFormatProvider formatProvider = null,
+            ParseMode parseMode = ParseMode.Markdown
         )
         {
             if (loggerConfiguration == null)
@@ -24,6 +25,7 @@ namespace Serilog.Sinks.TelegramBot
                     chatId: chatId,
                     token: token,
                     applicationName: applicationName,
+                    parseMode: parseMode,
                     renderMessageImplementation: renderMessageImplementation,
                     formatProvider: formatProvider
                 ),
