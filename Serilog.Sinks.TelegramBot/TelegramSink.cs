@@ -15,12 +15,10 @@ namespace Serilog.Sinks.TelegramBot
         public delegate TelegramMessage RenderMessageMethod(LogEvent input);
 
         private static string _applicationName;
+        private static ParseMode _parseMode;
         private readonly string _chatId;
         private readonly string _token;
-        private readonly ParseMode _parseMode;
         protected readonly IFormatProvider FormatProvider;
-
-        private static ParseMode _parseModeComparer;
 
         /// <summary>
         /// RenderMessage method that will transform LogEvent into a Telegram message.
@@ -50,8 +48,6 @@ namespace Serilog.Sinks.TelegramBot
             _chatId = chatId;
             _token = token;
             _parseMode = parseMode;
-
-            _parseModeComparer = _parseMode;
         }
 
         #region ILogEventSink implementation
@@ -61,11 +57,7 @@ namespace Serilog.Sinks.TelegramBot
             var message = FormatProvider != null
                 ? new TelegramMessage(text: logEvent.RenderMessage(formatProvider: FormatProvider))
                 : RenderMessageImplementation(input: logEvent);
-            SendMessage(
-                token: _token,
-                chatId: _chatId,
-                message: message
-            );
+                SendMessage(token: _token,chatId: _chatId, message: message);
         }
 
         #endregion
@@ -77,14 +69,14 @@ namespace Serilog.Sinks.TelegramBot
 
             if (!string.IsNullOrEmpty(_applicationName))
             {
-                sb.AppendLine(value: _parseModeComparer == ParseMode.Markdown 
+                sb.AppendLine(value: _parseMode == ParseMode.Markdown 
                     ? $"🤖 App: `{_applicationName}`" 
                     : $"🤖 App: <code>{_applicationName}</code>");
             }
 
             if (logEvent.Exception == null) return new TelegramMessage(text: sb.ToString());
             
-            if (_parseModeComparer == ParseMode.Markdown)
+            if (_parseMode == ParseMode.Markdown)
             {
                 sb.AppendLine(value: $"\n*{logEvent.Exception.Message}*\n");
                 sb.AppendLine(value: $"Message: `{logEvent.Exception.Message}`");
@@ -123,11 +115,7 @@ namespace Serilog.Sinks.TelegramBot
             }
         }
 
-        protected void SendMessage(
-            string token,
-            string chatId,
-            TelegramMessage message
-        )
+        protected void SendMessage(string token, string chatId, TelegramMessage message)
         {
             SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
 
