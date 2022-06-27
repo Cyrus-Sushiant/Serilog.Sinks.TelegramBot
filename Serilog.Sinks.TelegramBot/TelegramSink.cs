@@ -65,17 +65,22 @@ namespace Serilog.Sinks.TelegramBot
         protected static TelegramMessage RenderMessage(LogEvent logEvent)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage()}");
+            if (_parseMode == ParseMode.Markdown)
+                sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage()}");
+            else
+                sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage().HtmlEncode()}");
 
             if (!string.IsNullOrEmpty(_applicationName))
             {
-                sb.AppendLine(value: _parseMode == ParseMode.Markdown 
-                    ? $"🤖 App: `{_applicationName}`" 
-                    : $"🤖 App: <code>{_applicationName}</code>");
+                sb.AppendLine(
+                    value: _parseMode == ParseMode.Markdown
+                        ? $"🤖 App: `{_applicationName}`"
+                        : $"🤖 App: <code>{_applicationName.HtmlEncode()}</code>"
+                );
             }
 
             if (logEvent.Exception == null) return new TelegramMessage(text: sb.ToString());
-            
+
             if (_parseMode == ParseMode.Markdown)
             {
                 sb.AppendLine(value: $"\n*{logEvent.Exception.Message}*\n");
@@ -85,12 +90,12 @@ namespace Serilog.Sinks.TelegramBot
             }
             else
             {
-                sb.AppendLine(value: $"\n<b>{logEvent.Exception.Message}</b>\n");
-                sb.AppendLine(value: $"Message: <code>{logEvent.Exception.Message}</code>");
+                sb.AppendLine(value: $"\n<b>{logEvent.Exception.Message.HtmlEncode()}</b>\n");
+                sb.AppendLine(value: $"Message: <code>{logEvent.Exception.Message.HtmlEncode()}</code>");
                 sb.AppendLine(value: $"Type: <code>{logEvent.Exception.GetType().Name}</code>\n");
-                sb.AppendLine(value: $"Stack Trace\n<code>{logEvent.Exception}</code>");
+                sb.AppendLine(value: $"Stack Trace\n<code>{logEvent.Exception.ToString().HtmlEncode()}</code>");
             }
-            
+
             return new TelegramMessage(text: sb.ToString());
         }
 
