@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Serilog.Sinks.TelegramBot;
+namespace Serilog.Sinks.TelegramBot
 {
     public static class StringExtension
     {
