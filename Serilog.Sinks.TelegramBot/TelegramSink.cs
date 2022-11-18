@@ -1,9 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using Serilog.Core;
+﻿using Serilog.Core;
 using Serilog.Debugging;
 using Serilog.Events;
+using System;
+using System.Text;
 
 namespace Serilog.Sinks.TelegramBot
 {
@@ -14,8 +13,8 @@ namespace Serilog.Sinks.TelegramBot
         /// </summary>
         public delegate TelegramMessage RenderMessageMethod(LogEvent input);
 
-        private static string _applicationName;
-        private static ParseMode _parseMode;
+        protected static string ApplicationName;
+        protected static ParseMode ParseMode;
         private readonly string _chatId;
         private readonly string _token;
         protected readonly IFormatProvider FormatProvider;
@@ -25,14 +24,7 @@ namespace Serilog.Sinks.TelegramBot
         /// </summary>
         protected RenderMessageMethod RenderMessageImplementation = RenderMessage;
 
-        public TelegramSink(
-            string chatId,
-            string token,
-            string applicationName,
-            ParseMode parseMode,
-            RenderMessageMethod renderMessageImplementation,
-            IFormatProvider formatProvider
-        )
+        public TelegramSink(string chatId, string token, string applicationName, ParseMode parseMode, RenderMessageMethod renderMessageImplementation, IFormatProvider formatProvider)
         {
             if (string.IsNullOrWhiteSpace(value: chatId))
                 throw new ArgumentNullException(paramName: nameof(chatId));
@@ -40,14 +32,14 @@ namespace Serilog.Sinks.TelegramBot
             if (string.IsNullOrWhiteSpace(value: token))
                 throw new ArgumentNullException(paramName: nameof(token));
 
-            FormatProvider = formatProvider;
-            if (renderMessageImplementation != null)
-                RenderMessageImplementation = renderMessageImplementation;
-
-            _applicationName = applicationName;
             _chatId = chatId;
             _token = token;
-            _parseMode = parseMode;
+            ApplicationName = applicationName;
+            ParseMode = parseMode;
+            FormatProvider = formatProvider;
+
+            if (renderMessageImplementation != null)
+                RenderMessageImplementation = renderMessageImplementation;
         }
 
         #region ILogEventSink implementation
@@ -57,7 +49,8 @@ namespace Serilog.Sinks.TelegramBot
             var message = FormatProvider != null
                 ? new TelegramMessage(text: logEvent.RenderMessage(formatProvider: FormatProvider))
                 : RenderMessageImplementation(input: logEvent);
-                SendMessage(token: _token,chatId: _chatId, message: message);
+
+            SendMessage(token: _token, chatId: _chatId, message: message);
         }
 
         #endregion
@@ -65,23 +58,23 @@ namespace Serilog.Sinks.TelegramBot
         protected static TelegramMessage RenderMessage(LogEvent logEvent)
         {
             var sb = new StringBuilder();
-            if (_parseMode == ParseMode.Markdown)
+            if (ParseMode == ParseMode.Markdown)
                 sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage()}");
             else
                 sb.AppendLine(value: $"{GetEmoji(log: logEvent)} {logEvent.RenderMessage().HtmlEncode()}");
 
-            if (!string.IsNullOrEmpty(_applicationName))
+            if (!string.IsNullOrEmpty(ApplicationName))
             {
                 sb.AppendLine(
-                    value: _parseMode == ParseMode.Markdown
-                        ? $"🤖 App: `{_applicationName}`"
-                        : $"🤖 App: <code>{_applicationName.HtmlEncode()}</code>"
+                    value: ParseMode == ParseMode.Markdown
+                        ? $"🤖 App: `{ApplicationName}`"
+                        : $"🤖 App: <code>{ApplicationName.HtmlEncode()}</code>"
                 );
             }
 
-            if (logEvent.Exception == null) return new TelegramMessage(text: sb.ToString());
+            if (logEvent.Exception is null) return new TelegramMessage(text: sb.ToString());
 
-            if (_parseMode == ParseMode.Markdown)
+            if (ParseMode == ParseMode.Markdown)
             {
                 sb.AppendLine(value: $"\n*{logEvent.Exception.Message}*\n");
                 sb.AppendLine(value: $"Message: `{logEvent.Exception.Message}`");
@@ -125,17 +118,11 @@ namespace Serilog.Sinks.TelegramBot
             SelfLog.WriteLine($"Trying to send message to chatId '{chatId}': '{message}'.");
 
             var client = new TelegramBot(botToken: token, timeoutSeconds: 5);
+            var sendMessageTask = client.PostAsync(message, chatId, ParseMode);
+            sendMessageTask.Wait();
 
-            var sendMessageTask = client.PostAsync(
-                message: message,
-                chatId: chatId,
-                parseMode: _parseMode
-            );
-            Task.WaitAll(sendMessageTask);
-
-            var sendMessageResult = sendMessageTask.Result;
-            if (sendMessageResult != null)
-                SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{sendMessageResult.StatusCode}'.");
+            if (sendMessageTask.Result != null)
+                SelfLog.WriteLine($"Message sent to chatId '{chatId}': '{sendMessageTask.Result.StatusCode}'.");
         }
     }
 }

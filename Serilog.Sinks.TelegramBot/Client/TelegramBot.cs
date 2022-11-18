@@ -29,8 +29,7 @@ namespace Serilog.Sinks.TelegramBot
                 parse_mode = parseMode.ToString()
             };
             var json = JsonSerializer.Serialize(value: payload);
-            var response = await _httpClient.PostAsync(requestUri: _apiUrl,
-                content: new StringContent(content: json, encoding: Encoding.UTF8, mediaType: "application/json"));
+            var response = await _httpClient.PostAsync(requestUri: _apiUrl, content: new StringContent(content: json, encoding: Encoding.UTF8, mediaType: "application/json"));
 
             return response;
         }

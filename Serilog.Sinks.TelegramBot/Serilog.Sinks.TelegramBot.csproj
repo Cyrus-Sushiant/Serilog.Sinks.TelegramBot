@@ -1,36 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-    <Authors>Cyrus</Authors>
-    <Version>1.0.9</Version>
-    <Description>A Serilog sink that writes events as messages to Telegram.</Description>
-    <RepositoryUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <Company>SmartClouds.co</Company>
-    <PackageId>Serilog.Sinks.TelegramBot</PackageId>
-    <Copyright>MIT License</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</PackageProjectUrl>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageIconUrl />
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Product>Serilog.Sinks.TelegramBot</Product>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+		<Authors>Serilog.Sinks.TelegramBot Contributors</Authors>
+		<Version>1.1.0</Version>
+		<Description>A Serilog sink that writes events as messages to Telegram.</Description>
+		<RepositoryUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<Company>SmartClouds.co</Company>
+		<PackageId>Serilog.Sinks.TelegramBot</PackageId>
+		<Copyright>MIT License</Copyright>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://www.smartclouds.co</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageIconUrl />
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Product>Serilog.Sinks.TelegramBot</Product>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.11.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="2.12.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
