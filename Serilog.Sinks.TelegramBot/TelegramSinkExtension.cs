@@ -1,6 +1,6 @@
-﻿using System;
-using Serilog.Configuration;
+﻿using Serilog.Configuration;
 using Serilog.Events;
+using System;
 
 namespace Serilog.Sinks.TelegramBot
 {
@@ -14,8 +14,7 @@ namespace Serilog.Sinks.TelegramBot
             TelegramSink.RenderMessageMethod renderMessageImplementation = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             IFormatProvider formatProvider = null,
-            ParseMode parseMode = ParseMode.Markdown
-        )
+            ParseMode parseMode = ParseMode.Markdown)
         {
             if (loggerConfiguration == null)
                 throw new ArgumentNullException(paramName: nameof(loggerConfiguration));
@@ -27,8 +26,7 @@ namespace Serilog.Sinks.TelegramBot
                     applicationName: applicationName,
                     parseMode: parseMode,
                     renderMessageImplementation: renderMessageImplementation,
-                    formatProvider: formatProvider
-                ),
+                    formatProvider: formatProvider),
                 restrictedToMinimumLevel: restrictedToMinimumLevel);
         }
     }
