@@ -1,8 +1,7 @@
-﻿namespace Serilog.Sinks.TelegramBot
+﻿namespace Serilog.Sinks.TelegramBot;
+
+public enum ParseMode
 {
-    public enum ParseMode
-    {
-        Markdown,
-        HTML
-    }
+    Markdown,
+    HTML
 }
