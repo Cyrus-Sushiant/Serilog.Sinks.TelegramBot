@@ -13,8 +13,7 @@ public class TelegramBot
 
     public TelegramBot(string botToken, int timeoutSeconds = 10)
     {
-        if (string.IsNullOrEmpty(value: botToken))
-            throw new ArgumentException(message: "Bot token can't be empty", paramName: nameof(botToken));
+        ArgumentException.ThrowIfNullOrEmpty(botToken, nameof(botToken));
 
         _apiUrl = new Uri(uriString: $"https://api.telegram.org/bot{botToken}/sendMessage");
         _httpClient.Timeout = TimeSpan.FromSeconds(value: timeoutSeconds);
