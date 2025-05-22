@@ -49,6 +49,7 @@ public class TelegramSink : ILogEventSink
         var message = FormatProvider != null
             ? new TelegramMessage(text: logEvent.RenderMessage(formatProvider: FormatProvider))
             : RenderMessageImplementation(input: logEvent);
+        if (message == null) return; // Dont send anything
 
         SendMessage(token: _token, chatId: _chatId, message: message);
     }
