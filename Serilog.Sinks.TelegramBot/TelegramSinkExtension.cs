@@ -16,7 +16,7 @@ public static class TelegramSinkExtension
         IFormatProvider formatProvider = null,
         ParseMode parseMode = ParseMode.Markdown)
     {
-        ArgumentNullException.ThrowIfNull(nameof(loggerConfiguration));
+        ArgumentNullException.ThrowIfNull(loggerConfiguration, nameof(loggerConfiguration));
 
         return loggerConfiguration.Sink(
             logEventSink: new TelegramSink(

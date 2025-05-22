@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0;net8.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<Authors>Serilog.Sinks.TelegramBot Contributors</Authors>
 		<Version>1.1.2</Version>
 		<Description>A Serilog sink that writes events as messages to Telegram.</Description>
@@ -19,7 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>

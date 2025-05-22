@@ -26,11 +26,8 @@ public class TelegramSink : ILogEventSink
 
     public TelegramSink(string chatId, string token, string applicationName, ParseMode parseMode, RenderMessageMethod renderMessageImplementation, IFormatProvider formatProvider)
     {
-        if (string.IsNullOrWhiteSpace(value: chatId))
-            throw new ArgumentNullException(paramName: nameof(chatId));
-
-        if (string.IsNullOrWhiteSpace(value: token))
-            throw new ArgumentNullException(paramName: nameof(token));
+        ArgumentNullException.ThrowIfNullOrWhiteSpace(chatId, nameof(chatId));
+        ArgumentNullException.ThrowIfNullOrWhiteSpace(token, nameof(token));
 
         _chatId = chatId;
         _token = token;
@@ -46,10 +43,11 @@ public class TelegramSink : ILogEventSink
 
     public void Emit(LogEvent logEvent)
     {
-        var message = FormatProvider != null
+        var message = FormatProvider is not null
             ? new TelegramMessage(text: logEvent.RenderMessage(formatProvider: FormatProvider))
             : RenderMessageImplementation(input: logEvent);
-        if (message == null) return; // Dont send anything
+
+        if (message is null) return;
 
         SendMessage(token: _token, chatId: _chatId, message: message);
     }
