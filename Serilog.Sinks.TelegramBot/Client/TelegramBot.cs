@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Serilog.Sinks.TelegramBot;
 
@@ -26,7 +26,8 @@ public class TelegramBot
         {
             chat_id = chatId,
             text = message.Text,
-            parse_mode = parseMode.ToString()
+            parse_mode = parseMode.ToString(),
+            disable_notification = message.DisableNotification,
         };
         var json = JsonSerializer.Serialize(value: payload);
         var response = await _httpClient.PostAsync(requestUri: _apiUrl, content: new StringContent(content: json, encoding: Encoding.UTF8, mediaType: "application/json"));
