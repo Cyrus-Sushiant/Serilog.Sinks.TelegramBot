@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<Authors>Serilog.Sinks.TelegramBot Contributors</Authors>
-		<Version>1.1.2</Version>
+		<Version>1.1.3</Version>
 		<Description>A Serilog sink that writes events as messages to Telegram.</Description>
 		<RepositoryUrl>https://github.com/Cyrus-Sushiant/Serilog.Sinks.TelegramBot</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
